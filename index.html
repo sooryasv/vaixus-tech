@@ -3,158 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vaixus Systems | Autonomous Infrastructure</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>Vaixus Systems | Global AI Infrastructure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-dark: #0a0a0c;
-            --accent-blue: #007aff;
-            --accent-glow: rgba(0, 122, 255, 0.3);
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --text-main: #e0e0e0;
-        }
-
-        body, html {
-            margin: 0; padding: 0;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            overflow: hidden; /* Keeps it feeling like a dashboard */
-        }
-
-        /* Subtle Neural Grid Background */
-        .grid-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(0, 122, 255, 0.05) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(0, 122, 255, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -1;
-        }
-
-        .container {
-            display: flex; flex-direction: column; align-items: center;
-            justify-content: center; height: 100vh; text-align: center;
-            padding: 20px;
-        }
-
-        /* The Glass Fortress Box */
-        .hero-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 60px; border-radius: 24px;
-            box-shadow: 0 0 50px var(--accent-glow);
-            max-width: 800px;
-        }
-
-        .logo-v {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 3rem; font-weight: 700;
-            background: linear-gradient(180deg, #fff, var(--accent-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px; letter-spacing: -2px;
-        }
-
-        h1 {
-            font-size: 2.5rem; letter-spacing: -1px; margin: 10px 0;
-            font-weight: 700;
-        }
-
-        .typing-text {
-            font-family: 'JetBrains Mono', monospace;
-            color: var(--accent-blue); font-size: 1rem;
-            margin-bottom: 30px; height: 20px;
-        }
-
-        .cta-group {
-            margin-top: 40px;
-        }
-
-        input[type="email"] {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid #333; color: white;
-            padding: 15px 25px; border-radius: 8px;
-            width: 250px; outline: none;
-            transition: 0.3s;
-        }
-
-        input[type="email"]:focus { border-color: var(--accent-blue); }
-
-        button {
-            background: var(--accent-blue);
-            color: white; border: none;
-            padding: 15px 30px; border-radius: 8px;
-            font-weight: 700; cursor: pointer;
-            transition: 0.3s; margin-left: 10px;
-        }
-
-        button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px var(--accent-glow); }
-
-        .footer {
-            position: absolute; bottom: 30px; font-size: 0.8rem;
-            color: #555; letter-spacing: 1px;
-        }
-
-        /* 3D placeholder for Brother's Blender render */
-        .visual-anchor {
-            width: 200px; height: 200px; margin: 0 auto 30px auto;
-            border-radius: 50%; border: 1px dashed var(--accent-blue);
-            display: flex; align-items: center; justify-content: center;
-            color: var(--accent-blue); font-size: 0.7rem;
-            animation: pulse 4s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.05); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.5; }
-        }
+        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #e5e7eb; overflow-x: hidden; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .neural-grid { background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 30px 30px; }
+        .glow { box-shadow: 0 0 20px rgba(59, 130, 246, 0.1); }
     </style>
 </head>
-<body>
+<body class="neural-grid">
 
-<div class="grid-overlay"></div>
-
-<div class="container">
-    <div class="hero-card">
-        <div class="visual-anchor">
-            [ BLENDER 3D CORE INCOMING ]
+    <nav class="fixed top-0 w-full z-50 p-6 flex justify-between items-center glass">
+        <div class="text-xl font-semibold tracking-tighter uppercase">Vaixus <span class="text-blue-500">Systems</span></div>
+        <div class="space-x-8 text-sm mono uppercase tracking-widest text-gray-400">
+            <a href="#architecture" class="hover:text-white transition">Architecture</a>
+            <a href="#lab" class="hover:text-white transition">The Lab</a>
+            <a href="mailto:soorya@vaixus.tech" class="text-blue-400 hover:text-blue-300">Contact</a>
         </div>
-        <div class="logo-v">VAIXUS</div>
-        <h1>Autonomous Supply Chain Infrastructure</h1>
-        <div class="typing-text" id="typewriter"></div>
+    </nav>
 
-        <p style="color: #888; line-height: 1.6; max-width: 600px; margin: 0 auto;">
-            Engineering the intelligent core of global B2B logistics. <br>
-            Bridging complex data and industrial action via neural automation.
-        </p>
+    <main class="relative pt-32 pb-20 px-6 max-w-7xl mx-auto">
+        <section class="mb-20">
+            <div class="inline-block px-3 py-1 mb-6 text-xs mono text-blue-400 border border-blue-500/30 rounded-full bg-blue-500/10">
+                SYSTEM STATUS: OPERATIONAL
+            </div>
+            <h1 class="text-6xl md:text-8xl font-light tracking-tighter mb-8 leading-none">
+                Autonomous <br/> <span class="text-gray-500">Infrastructure.</span>
+            </h1>
+            <p class="max-w-xl text-lg text-gray-400 leading-relaxed">
+                Engineering the neural core of global industrial logistics. We build autonomous ecosystems designed for high-stakes, multi-modal B2B environments.
+            </p>
+        </section>
 
-        <div class="cta-group">
-            <input type="email" placeholder="Enter B2B Email">
-            <button>Request Alpha Access</button>
-        </div>
-    </div>
+        <section id="architecture" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+            <div class="md:col-span-2 glass p-8 rounded-3xl glow flex flex-col justify-between hover:border-blue-500/20 transition group">
+                <div>
+                    <h3 class="text-2xl mb-4">Autonomous Orchestration</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Self-operating agents built on proprietary neural models to identify and resolve complex logistical bottlenecks across international supply chains without human friction.</p>
+                </div>
+                <div class="mt-8 h-32 bg-gradient-to-r from-blue-500/10 to-transparent rounded-xl border border-white/5 flex items-center justify-center italic text-blue-500/50 text-xs">
+                    [ VISUALIZING AGENT LOGIC... ]
+                </div>
+            </div>
 
-    <div class="footer">
-        © 2026 VAIXUS SYSTEMS | TIRUPPUR • CHENNAI • GLOBAL
-    </div>
-</div>
+            <div class="glass p-8 rounded-3xl hover:border-blue-500/20 transition">
+                <div class="w-12 h-12 mb-6 bg-blue-500/20 rounded-lg flex items-center justify-center border border-blue-500/30 text-blue-400">
+                    <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9s2.015-9 4.5-9m0 0a9.015 9.015 0 010 18z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl mb-2">Global Scale</h3>
+                <p class="text-gray-400 text-sm">Decentralized infrastructure designed to scale across international borders and diverse industrial sectors.</p>
+            </div>
 
-<script>
-    const text = "Initializing AI Agents... Optimizing Logistics... Securing Infrastructure...";
-    let i = 0;
-    function typeWriter() {
-        if (i < text.length) {
-            document.getElementById("typewriter").innerHTML += text.charAt(i);
-            i++;
-            setTimeout(typeWriter, 50);
-        } else {
-            setTimeout(() => { document.getElementById("typewriter").innerHTML = ""; i = 0; typeWriter(); }, 3000);
-        }
-    }
-    typeWriter();
-</script>
+            <div class="glass p-8 rounded-3xl hover:border-blue-500/20 transition">
+                <h3 class="text-xl mb-4 mono text-blue-500 text-xs">// ARCHITECTURE</h3>
+                <h4 class="text-lg mb-2">Predictive Core</h4>
+                <p class="text-gray-400 text-sm">Real-time data synthesis for high-precision operational action.</p>
+            </div>
+
+            <div class="md:col-span-2 glass p-8 rounded-3xl hover:border-blue-500/20 transition flex items-center justify-between">
+                <div class="max-w-md">
+                    <h3 class="text-xl mb-2 text-white">Systems Sovereignty</h3>
+                    <p class="text-gray-400 text-sm">Industrial-grade frameworks prioritizing data integrity and operational speed for the modern trade era.</p>
+                </div>
+                <div class="hidden md:block text-4xl font-light text-white/10 italic">010110</div>
+            </div>
+
+        </section>
+
+        <footer class="mt-32 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs mono text-gray-500">
+            <div>© 2026 VAIXUS SYSTEMS. ALL RIGHTS RESERVED.</div>
+            <div class="mt-4 md:mt-0 space-x-6 uppercase">
+                <span>Deploy: [ Azure Global ]</span>
+                <span>Security: [ Enterprise Encrypted ]</span>
+            </div>
+        </footer>
+    </main>
 
 </body>
 </html>
