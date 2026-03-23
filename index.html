@@ -114,18 +114,33 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-            
-            <div class="md:col-span-2 glass p-8 rounded-[2rem] hover:bg-white/5 transition group cursor-pointer border-l-2 border-l-blue-500/50">
-                <div class="flex justify-between items-start mb-10">
-                    <span class="mono text-[10px] text-blue-400 bg-blue-500/10 px-2 py-1 rounded">LOG_FILE: 03.2026</span>
-                    <svg class="w-5 h-5 text-gray-600 group-hover:text-blue-400 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                </div>
-                <h4 class="text-xl mb-4 group-hover:text-blue-400 transition">Multi-Agent Logistics Modeling</h4>
-                <p class="text-gray-500 text-xs leading-relaxed mb-6">Implementing LLM-driven agents to resolve fragmented supply chain data. Focus: Reducing decision-latency in multi-modal B2B trade environments through recursive logic loops.</p>
-                <div class="mono text-[9px] text-gray-700 tracking-tighter">
-                    STATUS: <span class="text-green-500/70">PROTOTYPE_STABLE</span> | NODES: 12
-                </div>
+       <div class="bg-black/40 border border-white/10 p-6 rounded-2xl group hover:border-blue-500/50 transition-all duration-500">
+    <div class="flex justify-between items-start mb-4">
+        <div>
+            <h3 class="text-blue-400 font-mono text-xs tracking-widest uppercase">Node: VAX_PRIMARY_01</h3>
+            <p class="text-white text-lg font-semibold">Global Pulse Agent</p>
+        </div>
+        <div class="flex items-center gap-2 bg-green-500/10 px-3 py-1 rounded-full border border-green-500/20">
+            <div id="status-led" class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+            <span id="node-status" class="text-[10px] font-mono text-green-500 uppercase">Operational</span>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 mt-6">
+        <div class="bg-white/5 p-3 rounded-lg border border-white/5">
+            <p class="text-gray-500 text-[10px] uppercase font-mono">CPU Load</p>
+            <p id="cpu-val" class="text-white font-mono text-xl">--%</p>
+        </div>
+        <div class="bg-white/5 p-3 rounded-lg border border-white/5">
+            <p class="text-gray-500 text-[10px] uppercase font-mono">NY Latency</p>
+            <p id="latency-val" class="text-white font-mono text-xl">---ms</p>
+        </div>
+    </div>
+    
+    <div class="mt-4 opacity-50">
+        <p class="text-[9px] font-mono text-gray-400">SYNC_PROTOCOL: TLS_SECURE_V1.3</p>
+    </div>
+</div>
             </div>
 
             <div class="md:row-span-2 glass bg-black/40 rounded-[2rem] p-6 mono text-[10px] text-blue-500/70 overflow-hidden relative">
@@ -212,6 +227,40 @@
         <span class="hidden md:block">ENCRYPTION: AES-256-GCM</span>
     </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // YOUR NEURAL KEYS
+  const S_URL = 'https://nhcodgdshlnaifvhzvwp.supabase.co';
+  const S_KEY = 'sb_publishable_Na3vFEnVuv1ItGVrzgPkxw_CbHkjILD';
+  const _v_client = supabase.createClient(S_URL, S_KEY);
 
+  async function syncVaixusNode() {
+    const { data, error } = await _v_client
+      .from('nodes')
+      .select('*')
+      .eq('node_id', 'VAX_GLOBAL_PRIMARY_01')
+      .single();
+
+    if (data) {
+      // Smoothly update the values
+      document.getElementById('cpu-val').innerText = data.cpu_load;
+      document.getElementById('latency-val').innerText = data.latency_ny;
+      document.getElementById('node-status').innerText = data.status;
+      
+      // Visual proof the system is "Healthy"
+      document.getElementById('status-led').classList.add('bg-green-500');
+      document.getElementById('status-led').classList.remove('bg-red-500');
+    } else {
+      // Show "Offline" if data sync fails
+      document.getElementById('node-status').innerText = "CONNECTION_LOST";
+      document.getElementById('status-led').classList.add('bg-red-500');
+      document.getElementById('status-led').classList.remove('bg-green-500');
+    }
+  }
+
+  // Industrial Refresh Rate: 15 Seconds
+  setInterval(syncVaixusNode, 15000);
+  syncVaixusNode(); // Initial trigger
+</script>
 </body>
 </html>
