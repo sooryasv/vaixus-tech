@@ -239,7 +239,18 @@
       .from('nodes')
       .select('*')
       .eq('node_id', 'VAX_GLOBAL_PRIMARY_01')
-      .single();
+      .order('created_at', { ascending: false }) // Get the newest one first
+      .limit(1); // Only take that one newest row
+
+    if (data && data.length > 0) {
+      const latest = data[0]; // Use the first item in the list
+      document.getElementById('cpu-val').innerText = latest.cpu_load;
+      document.getElementById('latency-val').innerText = latest.latency_ny;
+      document.getElementById('node-status').innerText = latest.status;
+      
+      document.getElementById('status-led').classList.add('bg-green-500');
+      document.getElementById('status-led').classList.remove('bg-red-500');
+    }
 
     if (data) {
       // Smoothly update the values
