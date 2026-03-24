@@ -18,10 +18,10 @@
         .mono { font-family: 'JetBrains Mono', monospace; }
         .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
         .neural-grid { background-image: radial-gradient(circle, rgba(59, 130, 246, 0.08) 1px, transparent 1px); background-size: 30px 30px; }
-        .gradient-text { background: linear-gradient(to right, #fff, #9ca3af); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gradient-text { background: linear-gradient(to right, #fff, #9ca3af); -webkit-background-clip: text; -webkit-text-fill-color: transparent; padding-bottom: 0.1em; display: inline-block; }
         .btn-glow:hover { box-shadow: 0 0 20px rgba(59, 130, 246, 0.15); border-color: rgba(59, 130, 246, 0.3); }
         /* Subtle Watermark */
-        .watermark { position: absolute; font-size: 12rem; font-weight: 900; opacity: 0.02; pointer-events: none; z-index: 0; user-select: none; }
+        .watermark { position: absolute; font-size: 14vw; font-weight: 900; opacity: 0.05; pointer-events: none; z-index: 0; user-select: none; line-height: 1; }
     </style>
 </head>
 <body class="neural-grid">
@@ -59,7 +59,7 @@
         </span>
         <span class="tracking-widest uppercase font-semibold">Node Status: Operational</span>
     </div>
-    <h1 class="text-6xl md:text-8xl font-light tracking-tighter mb-8 leading-[0.85] gradient-text relative z-10">
+    <h1 class="text-6xl md:text-8xl font-light tracking-tighter mb-8 leading-[1.1] gradient-text relative z-10">
         Industrial <br/> Intelligence.
     </h1>
     <p class="max-w-xl text-lg text-gray-500 leading-relaxed mb-10 relative z-10">
@@ -121,7 +121,7 @@
                 <div class="flex justify-between items-start mb-8">
                     <div>
                         <h3 class="text-blue-400 font-mono text-[10px] tracking-[0.3em] uppercase">Node: VAX_GLOBAL_PRIMARY_01</h3>
-                        <p class="text-white text-xl font-light mt-1 italic uppercase tracking-tighter">Global Pulse Telemetry</p>
+                        <p class="text-white text-xl font-light mt-1 italic uppercase tracking-tighter"pb-1>Global Pulse Telemetry</p>
                     </div>
                     <div class="flex items-center gap-2 bg-green-500/5 px-3 py-1 rounded-sm border border-green-500/20">
                         <div id="status-led" class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
