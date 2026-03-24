@@ -139,6 +139,9 @@
     
     <div class="mt-4 opacity-50">
         <p class="text-[9px] font-mono text-gray-400">SYNC_PROTOCOL: TLS_SECURE_V1.3</p>
+        <p class="text-[9px] font-mono text-blue-400/60 mt-1 uppercase">
+    Last_Sync: <span id="last-sync" class="text-white">--:--:--</span>
+</p>
     </div>
 </div>
             </div>
@@ -229,7 +232,7 @@
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  // --- VAIXUS SYSTEMS: NEURAL LINK v1.2 ---
+  // --- VAIXUS SYSTEMS: NEURAL LINK v1.3 ---
   const S_URL = 'https://nhcodgdshlnaifvhzvwp.supabase.co';
   const S_KEY = 'sb_publishable_Na3vFEnVuv1ItGVrzgPkxw_CbHkjILD';
   const _v_client = supabase.createClient(S_URL, S_KEY);
@@ -253,16 +256,15 @@
         document.getElementById('latency-val').innerText = latest.latency_ny;
         document.getElementById('node-status').innerText = latest.status;
         
+        // NEW: Update the Heartbeat Clock
+        document.getElementById('last-sync').innerText = new Date().toLocaleTimeString();
+        
         // Ensure visual indicators are active
         const led = document.getElementById('status-led');
-        const statusLabel = document.getElementById('node-status');
-        
         if (led) led.className = "w-2 h-2 rounded-full bg-green-500 animate-pulse";
-        if (statusLabel) statusLabel.className = "text-[10px] font-mono text-green-500 uppercase";
       }
     } catch (err) {
       console.error("Link Error:", err.message);
-      document.getElementById('node-status').innerText = "OFFLINE";
     }
   }
 
