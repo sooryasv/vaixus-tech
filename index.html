@@ -229,53 +229,46 @@
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  // YOUR NEURAL KEYS
+  // --- VAIXUS SYSTEMS: NEURAL LINK v1.2 ---
   const S_URL = 'https://nhcodgdshlnaifvhzvwp.supabase.co';
   const S_KEY = 'sb_publishable_Na3vFEnVuv1ItGVrzgPkxw_CbHkjILD';
   const _v_client = supabase.createClient(S_URL, S_KEY);
 
- async function syncVaixusNode() {
-    const { data, error } = await _v_client
-      .from('nodes')
-      .select('*')
-      .eq('node_id', 'VAX_GLOBAL_PRIMARY_01')
-      .order('created_at', { ascending: false }) 
-      .limit(1);
+  async function syncVaixusNode() {
+    try {
+      const { data, error } = await _v_client
+        .from('nodes')
+        .select('*')
+        .eq('node_id', 'VAX_GLOBAL_PRIMARY_01')
+        .order('created_at', { ascending: false })
+        .limit(1);
 
-    // FIX: Check if data is an array and has at least one item
-    if (data && data.length > 0) {
-      const latest = data[0]; // This picks the newest record from the list
-      
-      document.getElementById('cpu-val').innerText = latest.cpu_load;
-      document.getElementById('latency-val').innerText = latest.latency_ny;
-      document.getElementById('node-status').innerText = latest.status;
-      
-      // Update visual indicators
-      document.getElementById('status-led').className = "w-2 h-2 rounded-full bg-green-500 animate-pulse";
-      document.getElementById('node-status').className = "text-[10px] font-mono text-green-500 uppercase";
-    }
-  }
+      if (error) throw error;
 
-    if (data) {
-      // Smoothly update the values
-      document.getElementById('cpu-val').innerText = data.cpu_load;
-      document.getElementById('latency-val').innerText = data.latency_ny;
-      document.getElementById('node-status').innerText = data.status;
-      
-      // Visual proof the system is "Healthy"
-      document.getElementById('status-led').classList.add('bg-green-500');
-      document.getElementById('status-led').classList.remove('bg-red-500');
-    } else {
-      // Show "Offline" if data sync fails
-      document.getElementById('node-status').innerText = "CONNECTION_LOST";
-      document.getElementById('status-led').classList.add('bg-red-500');
-      document.getElementById('status-led').classList.remove('bg-green-500');
+      if (data && data.length > 0) {
+        const latest = data[0];
+        
+        // Update the Telemetry UI
+        document.getElementById('cpu-val').innerText = latest.cpu_load;
+        document.getElementById('latency-val').innerText = latest.latency_ny;
+        document.getElementById('node-status').innerText = latest.status;
+        
+        // Ensure visual indicators are active
+        const led = document.getElementById('status-led');
+        const statusLabel = document.getElementById('node-status');
+        
+        if (led) led.className = "w-2 h-2 rounded-full bg-green-500 animate-pulse";
+        if (statusLabel) statusLabel.className = "text-[10px] font-mono text-green-500 uppercase";
+      }
+    } catch (err) {
+      console.error("Link Error:", err.message);
+      document.getElementById('node-status').innerText = "OFFLINE";
     }
   }
 
   // Industrial Refresh Rate: 15 Seconds
   setInterval(syncVaixusNode, 15000);
-  syncVaixusNode(); // Initial trigger
+  syncVaixusNode();
 </script>
 </body>
 </html>
